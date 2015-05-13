@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :groups
 
-  resources :runners
+  resources :planned_runs
+
+  resources :runs
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
