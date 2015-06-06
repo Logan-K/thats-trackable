@@ -28,7 +28,8 @@ class RunnersController < ApplicationController
 
     respond_to do |format|
       if @runner.save
-        format.html { redirect_to @runner, notice: 'Runner was successfully created.' }
+        log_in @runner
+        format.html { redirect_to "/runners/#{@runner.id}/today", notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @runner }
       else
         format.html { render :new }
@@ -91,6 +92,11 @@ class RunnersController < ApplicationController
     end
   end
 
+  def today
+    @today = Date.today
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_runner
@@ -99,6 +105,6 @@ class RunnersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def runner_params
-      params.require(:runner).permit(:name, :group_id, :role)
+      params.require(:runner).permit(:name, :group_id, :role, :username, :password)
     end
 end
